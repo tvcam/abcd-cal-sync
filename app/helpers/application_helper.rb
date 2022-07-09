@@ -1,10 +1,10 @@
 module ApplicationHelper
   def render_flash_message
-    if flash.present?
-      content_tag(:div, class: 'highlight') do
-        flash.each do |type, message|
-          concat content_tag(:pre, message)
-        end
+    return if flash.blank?
+
+    content_tag(:div, class: 'highlight') do
+      flash.each do |_type, message|
+        concat content_tag(:pre, message)
       end
     end
   end

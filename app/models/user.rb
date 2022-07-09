@@ -1,7 +1,6 @@
 class User < ApplicationRecord
 end
 
-
 # u = User.first
 
 # url = URI("https://www.googleapis.com/calendar/v3/users/me/calendarList")
