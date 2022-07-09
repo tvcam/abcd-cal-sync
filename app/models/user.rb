@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :calendars, dependent: :delete_all
+  has_many :events, through: :calendars
 end
 
 # u = User.first
