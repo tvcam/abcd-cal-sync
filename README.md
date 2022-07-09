@@ -1,24 +1,10 @@
-# README
+# ABCD Cal Sync
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Basic Rails application that let you sync and view your google calendar.
 
-Things you may want to cover:
+## Setup
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Requirements
+* Ruby 3.1.2
+* Rails ~> 7.0.3
+* sqlite3 ~> 1.4
