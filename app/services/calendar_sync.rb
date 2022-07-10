@@ -1,8 +1,8 @@
 class CalendarSync
   class Unauthorized < ::StandardError; end
 
-  CALENDARS_ENDPOINT = 'https://www.googleapis.com/calendar/v3/users/me/calendarList'.freeze
-  EVENTS_ENDPOINT = 'https://www.googleapis.com/calendar/v3/calendars/:calendar_id/events'.freeze
+  CALENDARS_ENDPOINT = 'https://www.googleapis.com/calendar/v3/users/me/calendarList?maxResults=5'.freeze
+  EVENTS_ENDPOINT = 'https://www.googleapis.com/calendar/v3/calendars/:calendar_id/events?maxResults=20'.freeze
 
   attr_reader :user, :start_at, :end_at
 
@@ -33,8 +33,8 @@ class CalendarSync
   end
 
   def sync(start_at, end_at)
-    @start_at = start_at.rfc3339
-    @end_at = end_at.rfc3339
+    @start_at = start_at.beginning_of_day.rfc3339
+    @end_at = end_at.end_of_day.rfc3339
 
     calendars = fetch_calendars
     calendars.each do |google_calendar|
@@ -54,7 +54,7 @@ class CalendarSync
 
   def fetch_events(calendar_id)
     events_endpoint = EVENTS_ENDPOINT.gsub(':calendar_id', calendar_id)
-    events_endpoint = "#{events_endpoint}?timeMax=#{end_at}&timeMin=#{start_at}"
+    events_endpoint = "#{events_endpoint}&timeMax=#{end_at}&timeMin=#{start_at}"
     make_request(events_endpoint)
   end
 

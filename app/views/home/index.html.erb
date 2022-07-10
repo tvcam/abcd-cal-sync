@@ -1,13 +1,13 @@
 <p>You are logged in as <%= current_user.email %>. <span><%= link_to 'Sign out', sign_out_path, data: { method: :delete } %></span></p>
 <h4>Calendars: <%= link_to '(Sync)', sync_calendar_path %></h4>
 
-<% @calendars.includes(:events).each do |calendar|%>
+<% @calendars.includes(:today_events).each do |calendar|%>
   <details>
     <summary><%= calendar.summary %> <%= '(Primary)' if calendar.primary? %></summary>
 
-    <% if calendar.events.any? %>
+    <% if calendar.today_events.any? %>
       <ul>
-        <% calendar.events.each do |event| %>
+        <% calendar.today_events.each do |event| %>
           <li>
             <p>
               <span><%= event.summary.presence || 'Untitled' %></span>
