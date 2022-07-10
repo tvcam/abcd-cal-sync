@@ -11,15 +11,22 @@ class SessionsController < ApplicationController
     client.code = params[:code]
     response = client.fetch_access_token!
 
-    begin
-      user = setup_user(response)
-      CalendarSync.sync_today(user)
-
-      redirect_to root_path, notice: 'Authorize success'
-    rescue GoogleIDToken::ValidationError => e
-      flash[:error] = e.message
-      redirect_to root_path
+    if response['scope'].exclude?(Google::Apis::CalendarV3::AUTH_CALENDAR_EVENTS_READONLY) || response['scope'].exclude?(Google::Apis::CalendarV3::AUTH_CALENDAR_READONLY)
+      flash[:error] = 'You need to authorize all requested scopes!'
+      redirect_to(authorize_path)
+    else
+      begin
+        user = setup_user(response)
+        CalendarSync.sync_today(user)
+        redirect_to root_path, notice: 'Authorize success'
+      rescue GoogleIDToken::ValidationError => e
+        flash[:error] = e.message
+        redirect_to root_path
+      end
     end
+  rescue Signet::AuthorizationError => e
+    flash[:error] = e.message
+    redirect_to root_path
   end
 
   def destroy
