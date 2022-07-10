@@ -14,7 +14,7 @@ class CalendarSync
         authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
         token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
         scope: [Google::Apis::CalendarV3::AUTH_CALENDAR_EVENTS_READONLY, Google::Apis::CalendarV3::AUTH_CALENDAR_READONLY, 'https://www.googleapis.com/auth/userinfo.email'],
-        redirect_uri: 'http://localhost:3000/google_sign_in/callback'
+        redirect_uri: Rails.application.credentials.oauth_callback_id
       }
     end
 
