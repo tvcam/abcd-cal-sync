@@ -4,5 +4,5 @@ class Event < ApplicationRecord
   serialize :attendees, Array
   serialize :creator, Hash
   serialize :event_end, Hash
-  serialize :event_start, Array
+  serialize :event_start, Hash
 end
