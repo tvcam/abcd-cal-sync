@@ -13,7 +13,7 @@
               <span><%= event.summary.presence || 'Untitled' %></span>
               
               <% if event.start_at? %>
-                <em> | <%= l(event.start_at, format: :short) %></em>
+                <em> | <%= format_event_start_date(event) %></em>
               <% end %>
 
               <mark><%= event.status&.titleize %></mark>
