@@ -1,5 +1,5 @@
 <p>You are logged in as <%= current_user.email %>. <span><%= link_to 'Sign out', sign_out_path, data: { method: :delete } %></span></p>
-<h4>Calendars:</h4>
+<h4>Calendars: <%= link_to '(Sync)', sync_calendar_path %></h4>
 
 <% @calendars.includes(:events).each do |calendar|%>
   <details>
