@@ -110,6 +110,10 @@ Style/RedundantFetchBlock:
   Exclude:
     - 'config/puma.rb'
 
+Metrics/BlockLength:
+  Exclude:
+    - 'db/schema.rb'
+
 # Offense count: 1
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: RequireEnglish.
